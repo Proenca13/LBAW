@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EditprofileController;
+use App\Http\Controllers\CheckoutController;
 
 
 /*
@@ -49,8 +50,15 @@ Route::get('/home/{id}', [ProductPageController::class, 'show'])->name('product.
 //Shopping Cart
 Route::controller(ShoppingCartController::class)->group(function () {
     Route::get('/shoppingcart', 'show')->name('shoppingcart');
+    Route::post('/cart/add', 'add')->name('cart.add');
+    Route::post('/cart/update', 'update')->name('cart.update');
+    Route::post('/cart/remove', 'remove')->name('cart.remove');
+    Route::post('/cart/clear', 'clear')->name('cart.clear');
+    Route::post('/cart/checkout', 'checkout')->name('cart.checkout');
+    Route::get('/cart/checkout', 'checkout')->name('cart.checkout');
+    Route::post('/cart/checkout/finalize', 'finalize')->name('checkout.finalize');
 });
-Route::post('/cart/add', [ShoppingCartController::class, 'add'])->name('cart.add');
+
 
 //Wishlist
 Route::controller(WishlistController::class)->group(function () {
@@ -103,4 +111,9 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
+});
+
+//checkout controller
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('/checkout', 'checkout')->name('checkout.process');
 });
