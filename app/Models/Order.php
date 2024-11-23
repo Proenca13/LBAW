@@ -15,6 +15,7 @@ class Order extends Model
     public $timestamps = false; // Para created_at e updated_at
 
     protected $fillable = [
+        'user_id',
         'tracking_number',
         'status',
         'estimated_delivery_date',
@@ -22,9 +23,9 @@ class Order extends Model
     ];
 
     // Definição de constantes para status do pedido
-    const STATUS_PROCESSING = 'Processing';
-    const STATUS_SHIPPED = 'Shipped';
-    const STATUS_DELIVERED = 'Delivered';
+    const STATUS_PROCESSING = 'processing';
+    const STATUS_SHIPPED = 'shipped';
+    const STATUS_DELIVERED = 'delivered';
 
     /**
      * Relacionamento com Transaction
