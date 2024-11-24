@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\EditprofileController;
@@ -14,6 +15,9 @@ use App\Http\Controllers\ProductPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShoppingCartController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +30,7 @@ use App\Http\Controllers\WishlistController;
 
 // Home
 Route::redirect('/', '/home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home', [HomeController::class, 'index'])->name('home');
 Route::controller(HomeController::class)->group(function () {
     Route::get('/home', 'show')->name('home');
     Route::get('/controllers', 'showControllers')->name('home.controllers');
@@ -93,6 +97,20 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLoginForm')->name('login');
     Route::post('/login', 'authenticate')->name('login.authenticate');
     Route::get('/logout', 'logout')->name('logout');
+});
+//admin
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('/login', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
+});
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
+    Route::post('/dashboard', [AdminController::class, 'showFiltredUsers'])->name('dashboard');
+    Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
+    Route::post('/change-user', [AdminController::class, 'changeUser'])->name('changeUser');
+    Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
+
 });
 
 Route::controller(RegisterController::class)->group(function () {
