@@ -17,6 +17,7 @@
         <link href="{{ url('css/search.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/admindashboard.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminchangeprofile.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/adminproduct.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
 
 
@@ -41,7 +42,7 @@
 
                
                 <div class="search-container">
-                    <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard') }}">
+                    <form id="adminsearchForm" method="POST" action="{{ url('/admin/dashboard/users') }}">
                         @csrf
                         <input type="text" name="query" id="query" value="{{ $query ?? '' }}" placeholder="Search...">
                         <button type="submit"><i class="fas fa-search"></i></button>
@@ -57,6 +58,10 @@
             </div>
         </header>
 
+        <nav class="main-nav">
+            <a href="{{ route('admin.dashboard.users') }}">Users</a>
+            <a href="{{ route('admin.dashboard.products') }}">Products</a>
+        </nav>
 
 
         <!-- Main Content -->

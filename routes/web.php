@@ -94,10 +94,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
 });
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'show'])->name('dashboard');
-    Route::post('/dashboard', [AdminController::class, 'showFiltredUsers'])->name('dashboard.filtred');
+    Route::get('/dashboard/users', [AdminController::class, 'show'])->name('dashboard.users');
+    Route::post('/dashboard/users', [AdminController::class, 'showFiltredUsers'])->name('dashboard.users.filtred');
+    Route::get('/dashboard/products', [AdminController::class, 'showProducts'])->name('dashboard.products');
     Route::post('/view-user', [AdminController::class, 'viewUser'])->name('viewUser');
+    Route::get('/view-product/{id}', [AdminController::class, 'viewProduct'])->name('viewProduct');
     Route::post('/change-user', [AdminController::class, 'changeUser'])->name('changeUser');
+    Route::post('/change-product', [AdminController::class, 'changeProduct'])->name('changeProduct');
     Route::post('/update-profile', [AdminController::class, 'update'])->name('updateProfile');
 
 });

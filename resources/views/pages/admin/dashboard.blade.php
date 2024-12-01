@@ -2,8 +2,9 @@
 
 @section('content')
 <div class="admin-dashboard">
-        <h1>Welcome, {{ Auth::user()->name }}!</h1>
+    <h1>Welcome, {{ Auth::user()->name }}!</h1>
 
+    @if (isset($users))
         <h2>Users:</h2>
         <div class="user-list">
             @foreach ($users as $user)
@@ -16,10 +17,25 @@
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                         <button type="submit" class="button-link">View Profile</button>
                     </form>
-
-
                 </div>
             @endforeach
         </div>
-    </div>
+    @elseif (isset($products))
+        <h2>Products:</h2>
+        
+        <div class="product-list">
+            @foreach ($products as $product)
+            <div class="product-container">
+            
+            <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="product-link">
+                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="product-image">
+                <div class="product-name">{{ $product->name }}</div>
+            </a>
+
+
+        </div>
+            @endforeach
+        </div>
+    @endif
+</div>
 @endsection
