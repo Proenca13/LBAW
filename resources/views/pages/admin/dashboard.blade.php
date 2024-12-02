@@ -20,6 +20,7 @@
                 </div>
             @endforeach
         </div>
+        <a href="{{ route('admin.createUser') }}" class="admin-button-link">New User</a>
     @elseif (isset($products))
         <h2>Products:</h2>
         
@@ -28,7 +29,7 @@
             <div class="product-container">
             
             <a href="{{ route('admin.viewProduct', ['id' => $product->id]) }}" class="product-link">
-                <img src="{{ $product->image }}" alt="{{ $product->name }}" class="product-image">
+                <img src="{{ asset('storage/' . $product->image) }}"alt="{{ $product->name }}" class="product-image">
                 <div class="product-name">{{ $product->name }}</div>
             </a>
 
@@ -36,6 +37,7 @@
         </div>
             @endforeach
         </div>
+        <a href="{{ route('admin.createProduct') }}" class="admin-button-link">New Product</a>
     @endif
 </div>
 @endsection

@@ -18,6 +18,7 @@
         <link href="{{ url('css/pages/admindashboard.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminchangeprofile.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/adminproduct.css') }}" rel="stylesheet">
+        <link href="{{ url('css/pages/admincreate.css') }}" rel="stylesheet">
         <link href="{{ url('css/pages/login.css') }}" rel="stylesheet">
 
 
@@ -38,7 +39,7 @@
         <header class="main-header">
             <div class="header-content">
                 <!-- Left Section (Logo) -->
-                <h1><a href="{{ url('/admin/dashboard') }}">Console Quest</a></h1>
+                <h1><a href="{{ url('/admin/dashboard/users') }}">Console Quest</a></h1>
 
                
                 <div class="search-container">
